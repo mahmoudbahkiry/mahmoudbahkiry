@@ -151,6 +151,25 @@ if (navigationLinks.length && pages.length) {
         if (this.innerHTML.toLowerCase() === pages[j].dataset.page) {
           pages[j].classList.add("active");
           window.scrollTo(0, 0);
+          
+          // Animate skill progress bars if this is the resume page
+          if (pages[j].dataset.page === "resume") {
+            setTimeout(() => {
+              const skillBars = document.querySelectorAll(".skill-progress-fill");
+              skillBars.forEach((bar, index) => {
+                // Stagger the animations with a 200ms delay between each bar
+                setTimeout(() => {
+                  bar.classList.add("animate");
+                }, index * 200);
+              });
+            }, 300);
+          } else {
+            // Reset animation for next time
+            const skillBars = document.querySelectorAll(".skill-progress-fill");
+            skillBars.forEach(bar => {
+              bar.classList.remove("animate");
+            });
+          }
         } else {
           pages[j].classList.remove("active");
         }
@@ -163,14 +182,28 @@ if (navigationLinks.length && pages.length) {
 const courseLinks = document.querySelectorAll(".course-link");
 
 if (courseLinks.length) {
-  for (let i = 0; i < courseLinks.length; i++) {
-    courseLinks[i].addEventListener("click", function(event) {
-      event.preventDefault();
-      const url = this.getAttribute("data-url");
-      
-      if (confirm("Would you like to be redirected to the course website?")) {
+  courseLinks.forEach(link => {
+    link.addEventListener("click", function(e) {
+      e.preventDefault(); 
+      const url = this.getAttribute("data-url") || this.getAttribute("href");
+      if (confirm("You are about to leave this site to visit an external course. Do you want to continue?")) {
         window.open(url, "_blank");
       }
     });
-  }
+  });
 }
+
+// Animate skill bars on page load if resume page is active
+document.addEventListener("DOMContentLoaded", function() {
+  const resumePage = document.querySelector('.resume');
+  if (resumePage && resumePage.classList.contains('active')) {
+    setTimeout(() => {
+      const skillBars = document.querySelectorAll(".skill-progress-fill");
+      skillBars.forEach((bar, index) => {
+        setTimeout(() => {
+          bar.classList.add("animate");
+        }, index * 200);
+      });
+    }, 500);
+  }
+});
