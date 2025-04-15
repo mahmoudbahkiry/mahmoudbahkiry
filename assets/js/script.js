@@ -207,3 +207,69 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 500);
   }
 });
+
+// Certificate modal functionality
+const certificateItems = document.querySelectorAll(".certificate-card");
+const certificateModalContainer = document.querySelector("[data-certificate-modal-container]");
+const certificateModalCloseBtn = document.querySelector("[data-certificate-modal-close-btn]");
+const certificateOverlay = document.querySelector("[data-certificate-overlay]");
+
+// Only proceed with certificate functionality if all required elements exist
+if (certificateItems.length && certificateModalContainer && certificateModalCloseBtn && certificateOverlay) {
+  // modal variable
+  const certificateModalImg = document.querySelector("[data-certificate-modal-img]");
+
+  // modal toggle function
+  const certificateModalFunc = function () {
+    certificateModalContainer.classList.toggle("active");
+  }
+
+  // add click event to all certificate items
+  for (let i = 0; i < certificateItems.length; i++) {
+    certificateItems[i].addEventListener("click", function () {
+      const imgSrc = this.querySelector(".certificate-img img").src;
+      const imgAlt = this.querySelector(".certificate-img img").alt;
+      
+      certificateModalImg.src = imgSrc;
+      certificateModalImg.alt = imgAlt;
+
+      certificateModalFunc();
+    });
+  }
+
+  // add click event to modal close button
+  certificateModalCloseBtn.addEventListener("click", certificateModalFunc);
+  certificateOverlay.addEventListener("click", certificateModalFunc);
+}
+
+// Contact links confirmation dialogs
+const contactLinks = document.querySelectorAll("[data-contact]");
+
+if (contactLinks.length) {
+  contactLinks.forEach(link => {
+    link.addEventListener("click", function(e) {
+      e.preventDefault();
+      const contactType = this.getAttribute("data-contact");
+      const href = this.getAttribute("href");
+      let confirmMessage = "";
+      
+      switch(contactType) {
+        case "email":
+          confirmMessage = "Would you like to send an email to Mahmoud Elbahkiry?";
+          break;
+        case "phone":
+          confirmMessage = "Would you like to make a phone call to Mahmoud Elbahkiry?";
+          break;
+        case "location":
+          confirmMessage = "Would you like to view Mahmoud Elbahkiry's location on Google Maps?";
+          break;
+        default:
+          confirmMessage = "Would you like to proceed?";
+      }
+      
+      if (confirm(confirmMessage)) {
+        window.open(href, "_blank");
+      }
+    });
+  });
+}

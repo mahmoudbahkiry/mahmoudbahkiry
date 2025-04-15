@@ -74,7 +74,7 @@
             <div class="contact-info">
               <p class="contact-title">Email</p>
 
-              <a href="mailto:ME2101530@tkh.edu.eg" class="contact-link">ME2101530@tkh.edu.eg</a>
+              <a href="mailto:ME2101530@tkh.edu.eg" class="contact-link" data-contact="email">ME2101530@tkh.edu.eg</a>
             </div>
 
           </li>
@@ -88,7 +88,7 @@
             <div class="contact-info">
               <p class="contact-title">Phone</p>
 
-              <a href="tel:+201020855850" class="contact-link">+201020855850</a>
+              <a href="tel:+201020855850" class="contact-link" data-contact="phone">+201020855850</a>
             </div>
 
           </li>
@@ -116,7 +116,7 @@
             <div class="contact-info">
               <p class="contact-title">Location</p>
 
-              <address>Cairo, Egypt</address>
+              <a href="https://maps.app.goo.gl/c5SuXgKwvrenXxvo6" class="contact-link" data-contact="location">Cairo, Egypt</a>
             </div>
 
           </li>
@@ -191,6 +191,10 @@
 
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Courses</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Certificates</button>
           </li>
 
         </ul>
@@ -648,10 +652,76 @@
       </article>
 
 
+      <!--
+        - #CERTIFICATES
+      -->
 
+      <article class="certificates" data-page="certificates">
+        
+        <header>
+          <h2 class="h2 article-title">Certificates</h2>
+        </header>
 
+        <section class="certificates-list">
+          <ul class="certificate-items">
+            <!-- EBIS Certificate -->
+            <li class="certificate-item active" data-category="education">
+              <div class="certificate-card">
+                <figure class="certificate-img">
+                  <img src="./assets/certificatess/EBIS certificate.jpg" alt="EBIS Certificate" loading="lazy">
+                  <div class="certificate-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                </figure>
+                <h3 class="certificate-title">Egyptian British International School</h3>
+                <p class="certificate-category">High school</p>
+              </div>
+            </li>
 
+            <!-- Alsafy Certificate -->
+            <li class="certificate-item active" data-category="internship">
+              <div class="certificate-card">
+                <figure class="certificate-img">
+                  <img src="./assets/certificatess/Alsafy integrated solutions certificate.jpg" alt="Alsafy Certificate" loading="lazy">
+                  <div class="certificate-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                </figure>
+                <h3 class="certificate-title">Alsafy Integrated Solutions</h3>
+                <p class="certificate-category">Internship</p>
+              </div>
+            </li>
 
+            <!-- Stock Trading Certificate -->
+            <li class="certificate-item active" data-category="course">
+              <div class="certificate-card">
+                <figure class="certificate-img">
+                  <img src="./assets/certificatess/Fundimentals of stock trading course.jpg" alt="Stock Trading Certificate" loading="lazy">
+                  <div class="certificate-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                </figure>
+                <h3 class="certificate-title">The Complete Foundation Stock Trading</h3>
+                <p class="certificate-category">Course</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Certificate Modal -->
+        <div class="certificate-modal-container" data-certificate-modal-container>
+          <div class="certificate-modal">
+            <button class="certificate-modal-close-btn" data-certificate-modal-close-btn title="Close certificate">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+            <div class="certificate-modal-img-wrapper">
+              <img src="" alt="Certificate" data-certificate-modal-img>
+            </div>
+          </div>
+          <div class="overlay" data-certificate-overlay></div>
+        </div>
+
+      </article>
 
 
 
