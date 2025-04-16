@@ -151,29 +151,38 @@ if (navigationLinks.length && pages.length) {
         if (this.innerHTML.toLowerCase() === pages[j].dataset.page) {
           pages[j].classList.add("active");
           window.scrollTo(0, 0);
-          
-          // Animate skill progress bars if this is the resume page
-          if (pages[j].dataset.page === "resume") {
-            setTimeout(() => {
-              const skillBars = document.querySelectorAll(".skill-progress-fill");
-              skillBars.forEach((bar, index) => {
-                // Stagger the animations with a 200ms delay between each bar
-                setTimeout(() => {
-                  bar.classList.add("animate");
-                }, index * 200);
-              });
-            }, 300);
-          } else {
-            // Reset animation for next time
-            const skillBars = document.querySelectorAll(".skill-progress-fill");
-            skillBars.forEach(bar => {
-              bar.classList.remove("animate");
-            });
-          }
         } else {
           pages[j].classList.remove("active");
         }
       }
+    });
+  }
+}
+
+// Function to observe skill bars and animate them when visible
+function setupSkillBarsObserver() {
+  const skillBars = document.querySelectorAll(".skill-progress-fill");
+  
+  if (skillBars.length) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Add animation class with a staggered delay
+          setTimeout(() => {
+            entry.target.classList.add("animate");
+          }, index * 100);
+          
+          // Once animated, no need to observe anymore
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 }); // Trigger when at least 20% of the element is visible
+    
+    // Observe each skill bar
+    skillBars.forEach(bar => {
+      // First, remove any existing animation class
+      bar.classList.remove("animate");
+      observer.observe(bar);
     });
   }
 }
@@ -193,19 +202,17 @@ if (courseLinks.length) {
   });
 }
 
-// Animate skill bars on page load if resume page is active
+// Set up observers when the page loads
 document.addEventListener("DOMContentLoaded", function() {
-  const resumePage = document.querySelector('.resume');
-  if (resumePage && resumePage.classList.contains('active')) {
-    setTimeout(() => {
-      const skillBars = document.querySelectorAll(".skill-progress-fill");
-      skillBars.forEach((bar, index) => {
-        setTimeout(() => {
-          bar.classList.add("animate");
-        }, index * 200);
-      });
-    }, 500);
-  }
+  setupSkillBarsObserver();
+  
+  // Re-setup observers when navigation occurs
+  navigationLinks.forEach(link => {
+    link.addEventListener("click", function() {
+      // Small delay to ensure page transition is complete
+      setTimeout(setupSkillBarsObserver, 100);
+    });
+  });
 });
 
 // Certificate modal functionality
