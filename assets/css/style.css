@@ -472,6 +472,10 @@ main {
   border-radius: 12px 12px 0 0;
   box-shadow: var(--shadow-2);
   z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .navbar-list {
@@ -896,19 +900,6 @@ main {
 
 .skill-progress-fill.animate {
   transform: scaleX(1);
-  animation: pulse 1.5s ease-in-out 1s;
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 
@@ -2162,4 +2153,145 @@ textarea.form-input::-webkit-resizer { display: none; }
   .certificate-items {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+/*-----------------------------------*\
+  #THEME TOGGLE BUTTON & NAVBAR OVERRIDE FOR LIGHT MODE
+\*-----------------------------------*/
+.theme-toggle-btn {
+  background: var(--bg-gradient-onyx);
+  color: var(--orange-yellow-crayola);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  box-shadow: var(--shadow-1);
+}
+
+.theme-toggle-btn::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  z-index: -1;
+  transition: var(--transition-1);
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+.theme-toggle-btn:hover::before {
+  background: var(--bg-gradient-yellow-1);
+}
+
+.theme-toggle-btn .moon-icon,
+.theme-toggle-btn .sun-icon {
+  position: absolute;
+  font-size: 20px;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.theme-toggle-btn .sun-icon {
+  opacity: 0;
+  transform: rotate(180deg) scale(0);
+}
+
+.theme-toggle-btn.light-active .moon-icon {
+  opacity: 0;
+  transform: rotate(-180deg) scale(0);
+}
+
+.theme-toggle-btn.light-active .sun-icon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+.theme-toggle-btn.animating {
+  animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+body.light-mode .navbar {
+  background: hsla(0, 0%, 95%, 0.75);
+  border: 1px solid var(--jet);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.9);
+}
+
+/*-----------------------------------*\
+  #COMING SOON FOOTER
+\*-----------------------------------*/
+
+.coming-soon-footer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2;
+}
+
+.coming-soon-footer p {
+  color: var(--vegas-gold);
+  font-size: var(--fs-6);
+  font-style: italic;
+  font-weight: var(--fw-500);
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 8px;
+  background: var(--bg-gradient-jet);
+  box-shadow: var(--shadow-1);
+  transition: transform 0.3s ease;
+}
+
+.coming-soon-footer p:hover {
+  transform: translateY(-3px);
+}
+
+/* Position the footers properly inside their containers */
+article.courses, article.certificates {
+  position: relative;
+  padding-bottom: 60px; /* Add space for the footer */
+  min-height: 70vh; /* Ensure there's enough height for the footer to be at the bottom */
+}
+
+/*-----------------------------------*\
+  #LIGHT MODE OVERRIDES
+\*-----------------------------------*/
+body.light-mode {
+  --bg-gradient-onyx: linear-gradient(to bottom right, hsl(0, 0%, 100%) 3%, hsl(0, 0%, 95%) 97%);
+  --bg-gradient-jet: linear-gradient(to bottom right, hsla(0, 0%, 90%, 0.25) 0%, hsla(0, 0%, 85%, 0) 100%);
+  --bg-gradient-yellow-1: linear-gradient(to bottom right, hsl(45, 100%, 85%) 0%, hsla(36, 100%, 83%, 0) 50%);
+  --bg-gradient-yellow-2: linear-gradient(135deg, hsla(45, 100%, 85%, 0.25) 0%, hsla(35, 100%, 83%, 0) 59.86%), hsl(45, 100%, 95%);
+  --border-gradient-onyx: linear-gradient(to bottom right, hsl(0, 0%, 95%) 0%, hsla(0, 0%, 95%, 0) 50%);
+  --text-gradient-yellow: linear-gradient(to right, hsl(45, 100%, 75%), hsl(35, 100%, 68%));
+  
+  --jet: hsl(0, 0%, 80%);
+  --onyx: hsl(0, 0%, 90%);
+  --eerie-black-1: hsl(0, 0%, 97%);
+  --eerie-black-2: hsl(0, 0%, 98%);
+  --smoky-black: hsl(0, 0%, 100%);
+  --white-1: hsl(0, 0%, 0%);
+  --white-2: hsl(0, 0%, 10%);
+  --orange-yellow-crayola: hsl(45, 100%, 65%);
+  --vegas-gold: hsl(45, 54%, 40%);
+  --light-gray: hsl(0, 0%, 50%);
+  --light-gray-70: hsla(0, 0%, 50%, 0.7);
+  --bittersweet-shimmer: hsl(0, 43%, 60%);
 }

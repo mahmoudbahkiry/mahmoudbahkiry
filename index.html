@@ -201,6 +201,11 @@
 
         </ul>
 
+        <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Theme">
+          <ion-icon name="moon-outline" class="moon-icon"></ion-icon>
+          <ion-icon name="sunny-outline" class="sun-icon"></ion-icon>
+        </button>
+
       </nav>
 
 
@@ -477,7 +482,7 @@
             <li class="skills-item">
 
               <div class="title-wrapper">
-                <h5 class="h5">Mobile Development (Kotlin, Flutter, React native)</h5>
+                <h5 class="h5">Mobile Development (Kotlin, Flutter, React, React native, Swift)</h5>
                 <data value="90">90%</data>
               </div>
 
@@ -517,11 +522,11 @@
 
               <div class="title-wrapper">
                 <h5 class="h5">Stock Market Trading</h5>
-                <data value="75">75%</data>
+                <data value="80">80%</data>
               </div>
 
               <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 75%;"></div>
+                <div class="skill-progress-fill" style="width: 80%;"></div>
               </div>
 
             </li>
@@ -554,7 +559,6 @@
       -->
 
       <article class="courses" data-page="courses">
-
         <header>
           <h2 class="h2 article-title">Courses</h2>
         </header>
@@ -651,7 +655,13 @@
 
         </section>
 
+        <div class="coming-soon-footer courses-footer">
+          <p>More courses coming soon!</p>
+        </div>
       </article>
+
+
+
 
 
       <!--
@@ -659,7 +669,6 @@
       -->
 
       <article class="certificates" data-page="certificates">
-        
         <header>
           <h2 class="h2 article-title">Certificates</h2>
         </header>
@@ -723,6 +732,9 @@
           <div class="overlay" data-certificate-overlay></div>
         </div>
 
+        <div class="coming-soon-footer certificates-footer">
+          <p>More certificates coming soon!</p>
+        </div>
       </article>
 
 
@@ -748,6 +760,9 @@
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- Ensure you include the theme-switch.js script at the bottom of your body -->
+  <script src="assets/js/theme-switch.js"></script>
 
 </body>
 
