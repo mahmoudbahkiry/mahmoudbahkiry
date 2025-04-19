@@ -223,12 +223,15 @@ const certificateOverlay = document.querySelector("[data-certificate-overlay]");
 
 // Only proceed with certificate functionality if all required elements exist
 if (certificateItems.length && certificateModalContainer && certificateModalCloseBtn && certificateOverlay) {
-  // modal variable
+  // modal variables
   const certificateModalImg = document.querySelector("[data-certificate-modal-img]");
+  const certificateDownloadBtn = document.querySelector("[data-certificate-download-btn]");
+  const certificateModal = document.querySelector(".certificate-modal");
 
   // modal toggle function
   const certificateModalFunc = function () {
     certificateModalContainer.classList.toggle("active");
+    document.body.classList.toggle("certificate-modal-open");
   }
 
   // add click event to all certificate items
@@ -239,6 +242,11 @@ if (certificateItems.length && certificateModalContainer && certificateModalClos
       
       certificateModalImg.src = imgSrc;
       certificateModalImg.alt = imgAlt;
+      
+      // Set direct download link - no confirmation needed
+      if (certificateDownloadBtn) {
+        certificateDownloadBtn.href = imgSrc;
+      }
 
       certificateModalFunc();
     });
@@ -246,7 +254,24 @@ if (certificateItems.length && certificateModalContainer && certificateModalClos
 
   // add click event to modal close button
   certificateModalCloseBtn.addEventListener("click", certificateModalFunc);
+  
+  // Close modal when clicking on the overlay (outside the certificate)
   certificateOverlay.addEventListener("click", certificateModalFunc);
+  
+  // Close modal when clicking outside the certificate modal content
+  certificateModalContainer.addEventListener("click", function(event) {
+    // Only close if clicking directly on the container, not its children
+    if (event.target === certificateModalContainer) {
+      certificateModalFunc();
+    }
+  });
+  
+  // Prevent clicks on the modal itself from bubbling up to the container
+  if (certificateModal) {
+    certificateModal.addEventListener("click", function(event) {
+      event.stopPropagation();
+    });
+  }
 }
 
 // Contact links confirmation dialogs
