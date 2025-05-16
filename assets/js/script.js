@@ -305,3 +305,17 @@ if (contactLinks.length) {
     });
   });
 }
+
+// ICC service item link handler
+const iccServiceItem = document.querySelector('[data-service-type="icc"]');
+
+if (iccServiceItem) {
+  iccServiceItem.style.cursor = 'pointer'; // Change cursor to indicate it's clickable
+  
+  iccServiceItem.addEventListener('click', function() {
+    const url = this.getAttribute('data-service-url');
+    if (confirm("You are about to be redirected to AUC's International Case Competition (ICC) page. Do you want to continue?")) {
+      window.open(url, '_blank');
+    }
+  });
+}

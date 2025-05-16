@@ -587,6 +587,32 @@ main {
   line-height: 1.6;
 }
 
+/* Add special styling for clickable service items with data-service-type */
+.service-item[data-service-type] {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item[data-service-type]:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-3);
+}
+
+.service-item[data-service-type]::after {
+  content: '\2197'; /* Arrow pointing top-right */
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: var(--orange-yellow-crayola);
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.service-item[data-service-type]:hover::after {
+  opacity: 1;
+}
+
 
 /**
  * #testimonials 
@@ -2411,4 +2437,12 @@ body .sidebar {
 /* Remove the certificate modal actions section as we've moved the button */
 .certificate-modal-actions {
   display: none;
+}
+
+/* Hide default tooltips from Ionicons */
+ion-icon::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
